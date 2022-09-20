@@ -13,6 +13,8 @@ hand-written digits, from 0-9.
 
 # Standard scientific Python imports
 import matplotlib.pyplot as plt
+import os 
+os.system('sudo pip install scikit-learn')
 
 # Import datasets, classifiers and performance metrics
 from sklearn import datasets, svm, metrics
