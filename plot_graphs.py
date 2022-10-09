@@ -18,8 +18,8 @@ c_list = [0.2, 0.5, 0.7, 1, 2, 5, 7, 10, 15, 20]
 h_param_comb = [{'gamma':g, 'C':c} for g in gamma_list for c in c_list]
 
 assert len(h_param_comb) == len(gamma_list)*len(c_list)
-train_frac = 0.8
-test_frac = 0.1
+train_frac = 0.7
+test_frac = 0.2
 dev_frac = 0.1
 
 #PART: load dataset -- data from csv, tsv, jsonl, pickle
