@@ -1,6 +1,8 @@
 import sys, os
+import _ssl
 import numpy as np
 from joblib import load
+from sklearn.model_selection import train_test_split
 
 
 sys.path.append(".")
@@ -91,6 +93,72 @@ def test_predicts_all():
 
     assert set(predicted) == set(y_test)
 
+def test_run1():    
+    h_param_comb = helper_h_params()
+    x_train, y_train = helper_create_bin_data(n=100, d=7)
+    x_dev, y_dev = x_train, y_train
+    x_test, y_test = x_train, y_train
+
+    clf = svm.SVC()
+    metric = metrics.accuracy_score
+    
+    model_path = "test_run_run1.joblib"
+    x_train, x_test, y_train, y_test = train_test_split( x_dev, y_dev, test_size=0.33, random_state=42)
+    actual_model_path = tune_and_save(clf, x_train, y_train, x_dev, y_dev, metric, h_param_comb, model_path)
+    best_model = load(actual_model_path)
+
+    test_run1 = best_model.predict(x_test)
+
+    assert set(test_run1) == set(y_test)
+
+def test_run2():    
+    h_param_comb = helper_h_params()
+    x_train, y_train = helper_create_bin_data(n=100, d=7)
+    x_dev, y_dev = x_train, y_train
+    x_test, y_test = x_train, y_train
+
+    clf = svm.SVC()
+    metric = metrics.accuracy_score
+    
+    model_path = "test_run_run2.joblib"
+    x_train, x_test, y_train, y_test = train_test_split( x_dev, y_dev, test_size=0.33, random_state=42)
+    actual_model_path = tune_and_save(clf, x_train, y_train, x_dev, y_dev, metric, h_param_comb, model_path)
+    best_model = load(actual_model_path)
+
+    test_run2 = best_model.predict(x_test)
+
+    assert set(test_run2) == set(y_test)
+
+def test_run3():    
+    h_param_comb = helper_h_params()
+    x_train, y_train = helper_create_bin_data(n=100, d=7)
+    x_dev, y_dev = x_train, y_train
+    x_test, y_test = x_train, y_train
+
+    clf = svm.SVC()
+    metric = metrics.accuracy_score
+    
+    model_path = "test_run_run3.joblib"
+    x_train, x_test, y_train, y_test = train_test_split( x_dev, y_dev, test_size=0.33, random_state=35)
+    actual_model_path = tune_and_save(clf, x_train, y_train, x_dev, y_dev, metric, h_param_comb, model_path)
+    best_model = load(actual_model_path)
+
+    test_run3 = best_model.predict(x_test)
+
+    assert set(test_run3) == set(y_test)
+
+def test_same_split():
+    test_run1()
+    test_run2()
+
+    assert test_run1() == test_run2()
+
+def test_diff_split():
+    test_run1()
+    test_run3()
+
+    assert test_run1() != test_run3()
+    
 
 # what more test cases should be there
 # irrespective of the changes to the refactored code.

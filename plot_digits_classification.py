@@ -33,6 +33,15 @@ from sklearn.model_selection import train_test_split
 #
 # Note: if we were working from image files (e.g., 'png' files), we would load
 # them using :func:`matplotlib.pyplot.imread`.
+parser = argparse.ArgumentParser(description='Process the arguments')
+parser.add_argument('--clf_name', metavar='N', type=str, nargs='+',
+                    help='an string for the classifier_name')
+parser.add_argument('--random_state', metavar='N', type=int, nargs='+',
+                    help='an integer for the Random_State')
+args = parser.parse_args()
+clf_name = args.clf_name[0]
+random_state = args.random_state[0]
+
 
 digits = datasets.load_digits()
 

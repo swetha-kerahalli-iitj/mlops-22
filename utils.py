@@ -133,6 +133,8 @@ def tune_and_save(
     best_model_name = model_type + "_" + best_param_config + ".joblib"
     if model_path == None:
         model_path = best_model_name
+    else:
+        model_path = model_path+best_model_name
     dump(best_model, model_path)
 
     print("Best hyperparameters were:" + str(best_h_params))
